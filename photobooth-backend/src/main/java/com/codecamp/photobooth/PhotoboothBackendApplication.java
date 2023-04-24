@@ -1,4 +1,4 @@
-package com.example.photoboothbackend;
+package com.codecamp.photobooth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
