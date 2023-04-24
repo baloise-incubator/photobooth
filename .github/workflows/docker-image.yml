@@ -21,9 +21,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
+        working-directory: /photobooth-frontend/
         run: |
-          gh repo set-package-json --package-json ./photobooth-frontend/package.json
-          npm i
+          npm ci
       - name: Build
         run: |
           npm run build -- --prod
