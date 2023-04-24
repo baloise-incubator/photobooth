@@ -25,5 +25,5 @@ jobs:
         working-directory: ./photobooth-frontend
       - name: Build
         run: |
-          npm run build -- --prod
+          npm run build
         working-directory: ./photobooth-frontend
