@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   BalButtonModule,
-  BalCoreModule,
+  BalCoreModule, BalFileUploadModule,
   BalFooterModule,
   BalHeadingModule, BalNavbarModule, BalStageModule
 } from "@baloise/design-system-components-angular";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BalCoreModule.forRoot(),
     BalCoreModule,
     BalFooterModule,
@@ -24,6 +26,7 @@ import {
     BalHeadingModule,
     BalStageModule,
     BalNavbarModule,
+    BalFileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]
