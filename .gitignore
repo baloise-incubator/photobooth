@@ -38,5 +38,3 @@ dist
 **/node_modules
 node
 .angular
-
-.mvn
