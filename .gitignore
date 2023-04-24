@@ -15,9 +15,10 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
+.idea/**/workspace.xml
 *.iws
-*.iml
 *.ipr
+*.iml
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +32,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+npm-debug.log*
+dist
+**/node_modules
+node
+.angular
+
+.mvn
