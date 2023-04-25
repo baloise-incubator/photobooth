@@ -17,7 +17,12 @@ export class AppComponent {
 
 
   onBalFilesAdded(e: CustomEvent) {
-    this.backendService.uploadDocument(e.detail[0]).subscribe(
+    const file = e.detail[0];
+
+    // Create a FormData object to send the file
+    const formData = new FormData();
+    formData.append('file', file);
+    this.backendService.uploadDocument(formData).subscribe(
       (e) => {
         console.log(e)
       },

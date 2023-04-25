@@ -12,10 +12,8 @@ export class BackendService {
   ) {
 
   }
-
-  uploadDocument(file: File): Observable<any> {
+  uploadDocument(file: FormData): Observable<any> {
     return this.http.post('api/upload', file);
   }
-
 
 }
