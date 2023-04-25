@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {BackendService} from "./src/service/backend.service";
 import {BalToastService} from "@baloise/design-system-components-angular";
+import {first, tap} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -17,24 +18,14 @@ export class AppComponent {
 
 
   onBalFilesAdded(e: CustomEvent) {
-    const file = e.detail[0];
-
-    // Create a FormData object to send the file
     const formData = new FormData();
-    formData.append('file', file);
-    this.backendService.uploadDocument(formData).subscribe(
-      (e) => {
-        console.log(e)
-      },
-      (e) => {
-        this.toaster.create({
-          message: `Error : ${e.message}`,
-          color: "danger",
-          duration: 5000
-        })
+    formData.append('file', e.detail[0]);
+    this.backendService.uploadDocument(formData).pipe(first(),tap( // Log the result or error
+      {
+        next: (data) => console.log(data),
+        error: (error) => console.log(error)
       }
-    )
-    console.log(e)
+    )).subscribe(r=>console.log(r));
   }
 
   onBalRejectedFile(e: Event) {
