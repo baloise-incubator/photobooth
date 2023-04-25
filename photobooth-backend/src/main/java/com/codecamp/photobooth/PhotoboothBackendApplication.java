@@ -1,9 +1,12 @@
 package com.codecamp.photobooth;
 
+import net.sourceforge.tess4j.TessAPI;
 import net.sourceforge.tess4j.Tesseract;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.io.File;
 
 @SpringBootApplication
 public class PhotoboothBackendApplication {
@@ -15,8 +18,9 @@ public class PhotoboothBackendApplication {
     @Bean
     Tesseract getTesseract() {
         Tesseract tesseract = new Tesseract();
-        // Modify to absolut path until relative is working
-        tesseract.setDatapath("C:\\Users\\salea\\Downloads\\tessdata");
+        String path = new File(PhotoboothBackendApplication.class.getResource("/").getPath()).getAbsolutePath();
+        tesseract.setOcrEngineMode(TessAPI.TessOcrEngineMode.OEM_TESSERACT_ONLY);
+        tesseract.setLanguage("deu");
         return tesseract;
     }
 }
