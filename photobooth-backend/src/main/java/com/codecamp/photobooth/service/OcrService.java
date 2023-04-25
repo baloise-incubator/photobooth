@@ -2,7 +2,6 @@ package com.codecamp.photobooth.service;
 
 import com.codecamp.photobooth.domain.OcrResult;
 import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,12 +15,16 @@ public class OcrService {
     @Autowired
     private Tesseract tesseract;
 
-    public OcrResult ocr(MultipartFile file) throws IOException, TesseractException {
-        File convFile = convert(file);
-        String text = tesseract.doOCR(convFile);
-        OcrResult ocrResult = new OcrResult();
-        ocrResult.setResult(text);
-        return ocrResult;
+    public OcrResult ocr(MultipartFile file) {
+        try {
+            File convFile = convert(file);
+            String text = tesseract.doOCR(convFile);
+            OcrResult ocrResult = new OcrResult();
+            ocrResult.setResult(text);
+            return ocrResult;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
     public static File convert(MultipartFile file) throws IOException {

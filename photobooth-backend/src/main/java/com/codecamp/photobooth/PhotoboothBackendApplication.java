@@ -5,19 +5,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.net.URL;
-
 @SpringBootApplication
 public class PhotoboothBackendApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PhotoboothBackendApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PhotoboothBackendApplication.class, args);
+    }
 
-	@Bean
-	Tesseract getTesseract() {
-		Tesseract tesseract = new Tesseract();
-		tesseract.setDatapath("../tessdata");
-		return tesseract;
-	}
+    @Bean
+    Tesseract getTesseract() {
+        Tesseract tesseract = new Tesseract();
+        // Modify to absolut path until relative is working
+        tesseract.setDatapath("C:\\Users\\salea\\Downloads\\tessdata");
+        return tesseract;
+    }
 }
