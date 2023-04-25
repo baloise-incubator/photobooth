@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.net.URL;
+
 @SpringBootApplication
 public class PhotoboothBackendApplication {
 
@@ -15,7 +17,7 @@ public class PhotoboothBackendApplication {
 	@Bean
 	Tesseract getTesseract() {
 		Tesseract tesseract = new Tesseract();
-		tesseract.setDatapath("./tessdata");
+		tesseract.setDatapath("../tessdata");
 		return tesseract;
 	}
 }
