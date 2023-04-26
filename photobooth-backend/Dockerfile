@@ -24,10 +24,8 @@ WORKDIR /app
 
 ARG JAR_FILE=/app/target/*.jar
 
-COPY ${JAR_FILE} app.jar
-
 # Copy the JAR file from the builder stage to the container
-COPY --from=builder app.jar .
+COPY --from=builder ${JAR_FILE} .
 
 # Run the Java app
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "$JAR_FILE"]
