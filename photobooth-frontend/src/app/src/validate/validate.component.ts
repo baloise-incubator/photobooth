@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-validate',
@@ -6,9 +6,16 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./validate.component.scss']
 })
 export class ValidateComponent {
-
-
   @Input()
   data: string | undefined;
+
+  @Input()
+  imageSrc: any;
+
+  @Input()
+  percentMatch: number = 45;
+
+  @Output()
+  uploadDocument: EventEmitter<CustomEvent> = new EventEmitter<CustomEvent>();
 
 }

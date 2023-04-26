@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {first, tap} from "rxjs";
+import {first} from "rxjs";
 import {BackendService} from "../service/backend.service";
 import {DocLanguage} from "../doc-language";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -17,6 +17,7 @@ export class FormComponent {
   content: string | undefined;
   populate = false;
   isLoading = false;
+  imageSrc:string | ArrayBuffer | null = '';
 
 
   constructor(private backendService: BackendService,
@@ -38,6 +39,10 @@ export class FormComponent {
     const formData = new FormData();
     formData.append('file', e.detail[0]);
     this.isLoading = true;
+      const file = e.detail[0];
+      const reader = new FileReader();
+      reader.onload = e => this.imageSrc = reader.result;
+      reader.readAsDataURL(file);
 
     this.backendService.uploadDocument(
       formData,

@@ -4,10 +4,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
-  BalButtonModule, BalCardModule, BalContentModule,
-  BalCoreModule, BalFileUploadModule,
+  BalButtonModule,
+  BalCardModule,
+  BalContentModule,
+  BalCoreModule, BalFieldModule,
+  BalFileUploadModule,
   BalFooterModule,
-  BalHeadingModule, BalIconModule, BalNavbarModule, BalStackModule, BalStageModule, BalTextModule
+  BalHeadingModule,
+  BalIconModule,
+  BalInputSliderModule,
+  BalNavbarModule,
+  BalStackModule,
+  BalStageModule,
+  BalTextModule
 } from "@baloise/design-system-components-angular";
 import {HttpClientModule} from "@angular/common/http";
 import { LandingComponent } from './src/landing/landing.component';
@@ -30,7 +39,7 @@ import { ValidateComponent } from './src/validate/validate.component';
     HttpClientModule,
     BalCoreModule.forRoot({
       defaults: {
-        icons: { balIconFile , balIconDocument},
+        icons: {balIconFile, balIconDocument},
       },
     }),
     BalCoreModule,
@@ -44,7 +53,9 @@ import { ValidateComponent } from './src/validate/validate.component';
     BalStackModule,
     BalIconModule,
     BalContentModule,
-    BalTextModule
+    BalTextModule,
+    BalInputSliderModule,
+    BalFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
