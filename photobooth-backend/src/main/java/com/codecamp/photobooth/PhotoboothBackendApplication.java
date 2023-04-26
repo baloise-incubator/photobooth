@@ -6,8 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.io.File;
-
 @SpringBootApplication
 public class PhotoboothBackendApplication {
 
@@ -18,8 +16,7 @@ public class PhotoboothBackendApplication {
     @Bean
     Tesseract getTesseract() {
         Tesseract tesseract = new Tesseract();
-        String path = new File(PhotoboothBackendApplication.class.getResource("/").getPath()).getAbsolutePath();
-        tesseract.setOcrEngineMode(TessAPI.TessOcrEngineMode.OEM_TESSERACT_ONLY);
+        tesseract.setOcrEngineMode(TessAPI.TessOcrEngineMode.OEM_TESSERACT_LSTM_COMBINED);
         tesseract.setLanguage("deu");
         return tesseract;
     }
