@@ -14,7 +14,7 @@ RUN npm run build
 # Use a lightweight NGINX base image for serving the built Angular application
 FROM nginx:1.21.3-alpine
 # Copy the built Angular application from the build stage to the NGINX container
-COPY --from=build /workdir/dist /usr/share/nginx/html
+COPY --from=build /workdir/dist/photobooth-frontend /usr/share/nginx/html
 COPY default.conf /etc/nginx/conf.d/
 # Expose the default NGINX port (80)
 EXPOSE 80
