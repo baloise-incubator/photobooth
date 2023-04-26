@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-validate',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./validate.component.scss']
 })
 export class ValidateComponent {
+
+
+  @Input()
+  data: string | undefined;
 
 }

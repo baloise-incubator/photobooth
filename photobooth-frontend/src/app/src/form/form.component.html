@@ -32,7 +32,8 @@
   </bal-stage-body>
 </bal-stage>
 <main class="container">
-  <router-outlet>
-  </router-outlet>
+
+  <app-validate *ngIf="!populate" [data]="content"></app-validate>
+  <app-populate *ngIf="populate" [data]="content"></app-populate>
 </main>
 

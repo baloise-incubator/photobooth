@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-populate',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./populate.component.scss']
 })
 export class PopulateComponent {
+
+  @Input()
+  data: string | undefined;
 
 }

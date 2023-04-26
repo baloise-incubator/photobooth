@@ -10,8 +10,8 @@ const routes: Routes = [
   {
     path: "form", component: FormComponent,
     children: [
-      {path: "validate", component: ValidateComponent},
-      {path: "populate", component: PopulateComponent}
+      {path: "validate", component: ValidateComponent, data: {value: 'validate'}},
+      {path: "populate", component: PopulateComponent, data: {value: 'populate'}}
     ]
   },
   {path: "**", redirectTo: '/'},

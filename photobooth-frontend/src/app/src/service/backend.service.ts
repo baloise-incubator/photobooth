@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
@@ -12,8 +12,14 @@ export class BackendService {
   ) {
 
   }
-  uploadDocument(file: FormData): Observable<any> {
-    return this.http.post('api/upload', file);
+
+  uploadDocument(file: FormData, lang: string | undefined, endpoint : string): Observable<any> {
+    return this.http.post(`api/${endpoint}`, file, {
+      params: {
+        lang: lang || 'deu'
+      },
+      responseType: 'text'
+    });
   }
 
 }
