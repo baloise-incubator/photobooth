@@ -17,6 +17,6 @@ FROM nginx:1.21.3-alpine
 COPY --from=build /workdir/dist /usr/share/nginx/html
 # Expose the default NGINX port (80)
 EXPOSE 80
+RUN mkdir -p /var/cache/nginx && chown nginx:nginx /var/cache/nginx
 # Start NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
-RUN mkdir -p /var/cache/nginx && chown nginx:nginx /var/cache/nginx
