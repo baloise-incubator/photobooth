@@ -1,5 +1,8 @@
 # Use an official Maven base image as a parent image
-FROM maven:3.8-openjdk-11-slim
+FROM maven:3.8-openjdk-11-slim AS builder
+
+# Copy the Maven project files to the container
+COPY pom.xml .
 
 # Build the Maven project
 RUN mvn clean install
