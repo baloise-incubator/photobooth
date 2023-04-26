@@ -21,6 +21,6 @@ EXPOSE 80
 RUN mkdir -p /var/cache/nginx && chown nginx:nginx /var/cache/nginx
 RUN mkdir -p /var/run/ && chown nginx:nginx /var/run
 RUN chgrp -R 0 /var/cache/ && \chmod -R g=u /var/cache/
-RUN chgrp -R 0 /var/run/nginx.pid && \chmod -R g=u /var/run/nginx.pid
+RUN chgrp -R 0 /var/run/ && \chmod -R g=u /var/run/
 # Start NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
