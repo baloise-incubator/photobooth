@@ -19,6 +19,6 @@ jobs:
       - name: Log in to Docker Hub
         run: docker login -u ${{ secrets.FM_DOCKER_USERNAME }} -p ${{ secrets.FM_DOCKER_PASSWORD }}    
       - name: Build frontend Docker image
-        run: docker build -t ${{ secrets.FM_DOCKER_USERNAME }}/photobooth-frontend:${GITHUB_SHA} -f photobooth-frontend/Dockerfile ./photobooth-frontend
+        run: docker build -t ${{ secrets.FM_DOCKER_USERNAME }}/photobooth-frontend:${{GITHUB_SHA}} -f photobooth-frontend/Dockerfile ./photobooth-frontend
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.FM_DOCKER_USERNAME }}/photobooth-frontend:${GITHUB_SHA}
+        run: docker push ${{ secrets.FM_DOCKER_USERNAME }}/photobooth-frontend:${{GITHUB_SHA}}
