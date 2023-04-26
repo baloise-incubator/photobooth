@@ -3,7 +3,6 @@ package com.codecamp.photobooth.service;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,17 +16,8 @@ import java.io.IOException;
 @Service
 public class OcrService {
 
-//    @Autowired
-//    private ApplicationContext applicationContext;
-
     @Autowired
     private Tesseract tesseract;
-
-//    private void initTesseract(String lang) {
-//        Tesseract tess = applicationContext.getBean(Tesseract.class);
-//        tess.setLanguage(lang == null ? "deu" : lang);
-//        tesseract = tess;
-//    }
 
     /**
      * Initialize Tesseract, preprocess image, and executes OCR. In case of an issue Runtime is thrown.
@@ -37,7 +27,6 @@ public class OcrService {
      * @return OCR string from document
      */
     public String doOcr(MultipartFile file, String language) {
-//        initTesseract(language);
         try {
             BufferedImage preProcessedImage = RGBToGrayScale(file);
             String str = tesseract.doOCR(preProcessedImage);
@@ -48,7 +37,7 @@ public class OcrService {
     }
 
     private String trimSpecialCharacters(String s) {
-        s = s.replaceAll("[^a-zA-Z0-9\\s\\n.‘?|\"',\\/@]+", "");
+        s = s.replaceAll("[^a-zA-Z0-9\\s\\näÄöÖüÜßẞ.‘?|\"',\\/@]+", "");
         return s;
     }
 
