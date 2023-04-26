@@ -27,3 +27,7 @@ jobs:
         run: |
           npm run build
         working-directory: ./photobooth-frontend
+      - name: Log in to Docker Hub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/photobooth-frontend:latest
