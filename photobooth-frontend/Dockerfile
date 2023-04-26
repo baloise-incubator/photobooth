@@ -19,6 +19,7 @@ COPY default.conf /etc/nginx/conf.d/
 # Expose the default NGINX port (80)
 EXPOSE 80
 RUN mkdir -p /var/cache/nginx && chown nginx:nginx /var/cache/nginx
+RUN mkdir -p /var/run/ && chown nginx:nginx /var/run
 RUN chgrp -R 0 /var/cache/ && \chmod -R g=u /var/cache/
 RUN chgrp -R 0 /var/run/nginx.pid && \chmod -R g=u /var/run/nginx.pid
 # Start NGINX in the foreground
