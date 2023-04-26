@@ -18,5 +18,6 @@ COPY --from=build /workdir/dist /usr/share/nginx/html
 # Expose the default NGINX port (80)
 EXPOSE 80
 RUN mkdir -p /var/cache/nginx && chown nginx:nginx /var/cache/nginx
+RUN chgrp -R 0 /var/cache/ && \chmod -R g=u /var/cache/
 # Start NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
