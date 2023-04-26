@@ -2,7 +2,7 @@
 FROM node:18 as build
 
 # Set the working directory in the container
-WORKDIR /workdir
+WORKDIR .
 
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:1.21.3-alpine
 
 # Copy the built Angular application from the build stage to the NGINX container
-COPY --from=build /workdir/dist /usr/share/nginx/html
+COPY --from=build /dist /usr/share/nginx/html
 
 # Expose the default NGINX port (80)
 EXPOSE 80
