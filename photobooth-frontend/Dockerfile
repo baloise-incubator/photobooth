@@ -20,5 +20,6 @@ COPY default.conf /etc/nginx/conf.d/
 EXPOSE 80
 RUN mkdir -p /var/cache/nginx && chown nginx:nginx /var/cache/nginx
 RUN chgrp -R 0 /var/cache/ && \chmod -R g=u /var/cache/
+RUN touch /run/nginx.pid \ && chown -R api-gatway:api-gatway /run/nginx.pid /cache/nginx
 # Start NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
