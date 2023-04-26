@@ -12,7 +12,7 @@
 	<groupId>com.codecamp</groupId>
 	<artifactId>photobooth-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>com.codecamp.photoboot</name>
+	<name>com.codecamp.photoboot-backend</name>
 	<description>Photobooth - A Code Camp app</description>
 
 	<scm>
@@ -20,6 +20,8 @@
 		<developerConnection>scm:git:https://github.com/baloise-incubator/photobooth.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
+
+	<packaging>pom</packaging>
 
 	<properties>
 		<java.version>11</java.version>
