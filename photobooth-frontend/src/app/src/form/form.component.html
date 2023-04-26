@@ -24,7 +24,8 @@
         [multiple]="'false'"
         hasFileList="false"
         (balFilesAdded)="onBalFilesAdded($event)"
-        (balRejectedFile)="onBalRejectedFile($event)">
+        (balRejectedFile)="onBalRejectedFile($event)"
+        [loading]="isLoading">
 
       </bal-file-upload>
     </ng-container>
