@@ -1,0 +1,38 @@
+<bal-stage color="green" size="small">
+  <bal-stage-body>
+    <bal-heading>Welcome to the Doc Scanner</bal-heading>
+    <bal-heading subtitle>Hopefully...</bal-heading>
+
+
+    <ng-container *ngIf="!docLanguage">
+      <bal-heading subtitle class="pt-large">Choose language of document</bal-heading>
+
+      <bal-button-group position="left">
+          <bal-button color="primary" *ngFor="let lang of languages | keyvalue"
+                      (click)="docLanguage = lang.key">
+            {{lang.value}}
+          </bal-button>
+      </bal-button-group>
+    </ng-container>
+
+    <ng-container *ngIf="docLanguage">
+      <bal-heading subtitle class="pt-large">Upload doc:</bal-heading>
+
+      <bal-file-upload
+        accept="image/png,image/jpeg"
+        [label]="'Choose file to scan'"
+        [multiple]="'false'"
+        hasFileList="false"
+        (balFilesAdded)="onBalFilesAdded($event)"
+        (balRejectedFile)="onBalRejectedFile($event)">
+
+      </bal-file-upload>
+    </ng-container>
+
+  </bal-stage-body>
+</bal-stage>
+<main class="container">
+  <router-outlet>
+  </router-outlet>
+</main>
+
