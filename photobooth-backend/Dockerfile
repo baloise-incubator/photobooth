@@ -17,13 +17,15 @@ COPY . .
 RUN mvn package
 
 # Use an official Java runtime as a base image
-FROM openjdk:11-jre-slim
+FROM openjdk:11-jre-slim as final
 
 # Set the working directory in the container
 WORKDIR /app
 
+ARG JAR_FILE=/app/target/*.jar
+
 # Copy the JAR file from the builder stage to the container
-COPY --from=builder /app/target/photobooth-backend.jar .
+COPY --from=builder ${JAR_FILE} ./app.jar
 
 # Run the Java app
-CMD ["java", "-jar", "photobooth-backend.jar"]
+CMD ["java", "-jar", "app.jar"]
