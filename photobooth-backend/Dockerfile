@@ -1,16 +1,26 @@
 # Use an official Maven base image as a parent image
 FROM maven:3.8-openjdk-11-slim AS builder
 
+# Set the working directory in the container
+WORKDIR /app
+
 # Copy the Maven project files to the container
 COPY pom.xml .
 
 # Build the Maven project
 RUN mvn clean install
 
+# Copy the entire project to the container
+COPY . .
+
 # Build the JAR file
 RUN mvn package
 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
+# Set the working directory in the container
+WORKDIR /app
 
-CMD ["java", "-jar", "/app.jar"]
+# Copy the JAR file from the builder stage to the container
+COPY --from=builder /app/target/photobooth-backend.jar .
+
+# Run the Java app
+CMD ["java", "-jar", "photobooth-backend.jar"]
