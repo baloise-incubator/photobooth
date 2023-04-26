@@ -16,6 +16,9 @@ COPY . .
 # Build the JAR file
 RUN mvn package
 
+# Use an official Java runtime as a base image
+FROM openjdk:11-jre-slim as final
+
 # Set the working directory in the container
 WORKDIR /app
 
