@@ -4,8 +4,6 @@ FROM node:18 as build
 WORKDIR /workdir
 # Copy package.json and package-lock.json to the container
 
-RUN mkdir -p /var/cache/nginx && chown nginx:nginx /var/cache/nginx
-
 COPY ./package*.json ./
 # Install dependencies
 RUN npm ci
@@ -21,3 +19,4 @@ COPY --from=build /workdir/dist /usr/share/nginx/html
 EXPOSE 80
 # Start NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
+RUN mkdir -p /var/cache/nginx && chown nginx:nginx /var/cache/nginx
