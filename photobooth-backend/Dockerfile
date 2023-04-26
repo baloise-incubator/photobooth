@@ -23,7 +23,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copy the JAR file from the builder stage to the container
-COPY --from=builder /app/target/photobooth-backend.jar .
+COPY --from=builder /target/photobooth-backend.jar .
 
 # Run the Java app
 CMD ["java", "-jar", "photobooth-backend.jar"]
