@@ -111,6 +111,29 @@ public class OcrService {
         // and writing on a .png file
         BufferedImage fopimage
                 = rescale.filter(opimage, null);
+
+
+        //rgb to c&w
+        int width = fopimage.getWidth();
+        int height = fopimage.getHeight();
+        for(int y = 0; y < height; y++){
+            for(int x = 0; x < width; x++){
+                int p = fopimage.getRGB(x,y);
+
+                int a = (p>>24)&0xff;
+                int r = (p>>16)&0xff;
+                int g = (p>>8)&0xff;
+                int b = p&0xff;
+
+                //calculate average
+                int avg = (r+g+b)/3;
+
+                //replace RGB value with avg
+                p = (a<<24) | (avg<<16) | (avg<<8) | avg;
+
+                fopimage.setRGB(x, y, p);
+            }
+        }
         ImageIO
                 .write(fopimage,
                         "jpg",
