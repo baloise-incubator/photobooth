@@ -22,3 +22,7 @@ jobs:
         run: docker build -t ${{ secrets.FM_DOCKER_USERNAME }}/photobooth-frontend:${GITHUB_SHA} -f photobooth-frontend/Dockerfile ./photobooth-frontend
       - name: Push frontend Docker image to Docker Hub
         run: docker push ${{ secrets.FM_DOCKER_USERNAME }}/photobooth-frontend:${GITHUB_SHA}
+      - name: Build backend Docker image
+        run: docker build -t ${{ secrets.FM_DOCKER_USERNAME }}/photobooth-backend:${GITHUB_SHA} -f photobooth-backend/Dockerfile ./photobooth-backend
+      - name: Push backend Docker image to Docker Hub
+        run: docker push ${{ secrets.FM_DOCKER_USERNAME }}/photobooth-backend:${GITHUB_SHA}
