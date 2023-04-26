@@ -1,48 +1,54 @@
 <bal-card class="mt-normal">
     <bal-card-title>Form is matching with document by: {{percentMatch}}%</bal-card-title>
-    <bal-card-subtitle *ngIf="imageSrc">
+    <bal-card-subtitle>
       <bal-input-slider max="100" min="0" step="20" value="{{percentMatch}}"></bal-input-slider>
     </bal-card-subtitle>
     <bal-card-content>
       <div class="columns">
-        <div class="column">
+        <form *ngIf="form" [formGroup]="form" class="column">
           <bal-field>
             <bal-field-label>Firstname</bal-field-label>
             <bal-field-control>
-              <bal-input placeholder="Enter your firstname"></bal-input>
+              <bal-input formControlName="firstName" placeholder="Enter your firstname"></bal-input>
             </bal-field-control>
           </bal-field>
           <bal-field>
             <bal-field-label>Lastname</bal-field-label>
             <bal-field-control>
-              <bal-input placeholder="Enter your lastname"></bal-input>
+              <bal-input formControlName="lastName" placeholder="Enter your lastname"></bal-input>
             </bal-field-control>
           </bal-field>
           <bal-field>
             <bal-field-label>PostCode</bal-field-label>
             <bal-field-control>
-              <bal-input placeholder="Enter your firstname"></bal-input>
+              <bal-input formControlName="postCode" placeholder="Enter your post code"></bal-input>
             </bal-field-control>
           </bal-field>
           <bal-field>
             <bal-field-label>Street</bal-field-label>
             <bal-field-control>
-              <bal-input placeholder="Enter your firstname"></bal-input>
+              <bal-input formControlName="street" placeholder="Enter your street"></bal-input>
             </bal-field-control>
           </bal-field>
           <bal-field>
-            <bal-field-label>Postcode</bal-field-label>
+            <bal-field-label>City</bal-field-label>
             <bal-field-control>
-              <bal-input placeholder="Enter your firstname"></bal-input>
+              <bal-input formControlName="city" placeholder="Enter your city"></bal-input>
             </bal-field-control>
           </bal-field>
           <bal-field>
             <bal-field-label>House number</bal-field-label>
             <bal-field-control>
-              <bal-input placeholder="Enter your firstname"></bal-input>
+              <bal-input formControlName="houseNumber" placeholder="Enter your house number"></bal-input>
             </bal-field-control>
           </bal-field>
-        </div>
+          <bal-field>
+            <bal-field-label>Policy number</bal-field-label>
+            <bal-field-control>
+              <bal-input formControlName="policyNumber" placeholder="Enter your firstname"></bal-input>
+            </bal-field-control>
+          </bal-field>
+        </form>
         <div class="column">
           <img [src]="imageSrc" alt="Preview" width="80%">
           <bal-file-upload (balFilesAdded)="uploadDocument.emit($event)" hasFileList="false" accept="image/png,image/jpeg"></bal-file-upload>
