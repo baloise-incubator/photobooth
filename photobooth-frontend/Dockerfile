@@ -15,6 +15,7 @@ RUN npm run build
 FROM nginx:1.21.3-alpine
 # Copy the built Angular application from the build stage to the NGINX container
 COPY --from=build /workdir/dist /usr/share/nginx/html
+COPY default.conf /etc/nginx/conf.d/
 # Expose the default NGINX port (80)
 EXPOSE 80
 RUN mkdir -p /var/cache/nginx && chown nginx:nginx /var/cache/nginx
