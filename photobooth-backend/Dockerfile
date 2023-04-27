@@ -1,10 +1,12 @@
-RUN apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-all;
-
 # Use an official Maven base image as a parent image
 FROM maven:3.8-openjdk-11-slim AS builder
 
 # Set the working directory in the container
 WORKDIR /app
+
+RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-all;
+RUN apt update;
+RUN tesseract --version;
 
 # Copy the Maven project files to the container
 COPY pom.xml .
