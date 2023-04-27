@@ -4,7 +4,7 @@ FROM maven:3.8-openjdk-11-slim AS builder
 # Set the working directory in the container
 WORKDIR /app
 
-RUN apt-get update; apt-get install -y sudo; sudo apt-get install -y tesseract-ocr
+RUN apt-get update; apt-get install -y tesseract-ocr-all libleptonica-dev libtesseract-dev;
 
 # Copy the Maven project files to the container
 COPY pom.xml .
