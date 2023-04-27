@@ -13,7 +13,7 @@ RUN mvn clean install
 # Copy the entire project to the container
 COPY . .
 
-RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-fra tesseract-ocr-ita; tesseract --version; cp -r /usr/lib/x86_64-linux-gnu/* /app/src/main/resources/;
+RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-fra tesseract-ocr-ita; tesseract --version; cp -r /usr/lib/x86_64-linux-gnu/* /app/src/main/resources/linux-x86-64;
 
 # Build the JAR file
 RUN mvn package
@@ -28,6 +28,8 @@ ARG JAR_FILE=/app/target/*.jar
 
 # Copy the JAR file from the builder stage to the container
 COPY --from=builder ${JAR_FILE} ./app.jar
+
+COPY --from=builder ./app.jar/BOOT-INF/classes/linux-x86-64 ./app.jar/BOOT-INF/classes/
 
 # Run the Java app
 ENTRYPOINT ["java", "-jar", "app.jar"]
