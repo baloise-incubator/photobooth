@@ -22,12 +22,13 @@ public class PhotoboothBackendApplication {
     Tesseract getTesseract() {
         ClassLoader classLoader = getClass().getClassLoader();
         String resourcePath = classLoader.getResource("").getPath();
+        String tessdataPath = "";
         if (resourcePath.charAt(0) == '/') {
-            resourcePath = resourcePath.substring(1);
+            tessdataPath = resourcePath.substring(1);
         } else if (resourcePath.substring(0, 4).contains("file")) {
-            resourcePath = resourcePath.substring(5);
+            tessdataPath = resourcePath.substring(5);
         }
-        String tessdataPath = resourcePath + "tessdata";
+        tessdataPath = tessdataPath + "tessdata";
         System.setProperty("TESSDATA_PREFIX", tessdataPath);
         log.info("tessdata: " + tessdataPath);
         Tesseract tesseract = new Tesseract();
