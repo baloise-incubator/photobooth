@@ -41,6 +41,7 @@ public class OcrService {
     }
 
     private String trimSpecialCharacters(String s) {
+        s = s.replaceAll("(?<=[a-zA-Z0-9äÄöÖüÜßẞ])\\|", "l");
         s = s.replaceAll("[^a-zA-Z0-9\\s\\näÄöÖüÜßẞ.‘?|\"',\\/@]+", "");
         return s;
     }
