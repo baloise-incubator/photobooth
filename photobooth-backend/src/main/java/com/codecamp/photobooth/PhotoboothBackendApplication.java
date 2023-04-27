@@ -24,6 +24,8 @@ public class PhotoboothBackendApplication {
         String resourcePath = classLoader.getResource("").getPath();
         if (resourcePath.charAt(0) == '/') {
             resourcePath = resourcePath.substring(1);
+        } else if (resourcePath.substring(0, 4).contains("file")) {
+            resourcePath = resourcePath.substring(5);
         }
         String tessdataPath = resourcePath + "tessdata";
         System.setProperty("TESSDATA_PREFIX", tessdataPath);
