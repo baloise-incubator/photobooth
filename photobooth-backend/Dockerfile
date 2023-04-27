@@ -16,6 +16,8 @@ COPY . .
 # Build the JAR file
 RUN mvn package
 
+FROM maven:3.8-openjdk-11-slim AS builder
+
 RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-fra tesseract-ocr-ita;
 RUN apt update;
 RUN tesseract --version;
