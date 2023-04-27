@@ -19,8 +19,6 @@ public class PhotoboothBackendApplication {
     Tesseract getTesseract() {
         Tesseract tesseract = new Tesseract();
         tesseract.setOcrEngineMode(TessAPI.TessOcrEngineMode.OEM_TESSERACT_LSTM_COMBINED);
-        String path = new File(PhotoboothBackendApplication.class.getResource("/").getPath()).getAbsolutePath();
-        tesseract.setDatapath(path);
         tesseract.setLanguage("deu");
         return tesseract;
     }
