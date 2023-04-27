@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {debounceTime, takeUntil} from "rxjs";
+import {debounceTime} from "rxjs";
 import {ValidationService} from "./validation.service";
 
 @Component({
@@ -8,7 +8,7 @@ import {ValidationService} from "./validation.service";
   templateUrl: './validate.component.html',
   styleUrls: ['./validate.component.scss']
 })
-export class ValidateComponent implements OnInit{
+export class ValidateComponent implements OnInit {
   data: string[] = [];
   imageSrc: string | ArrayBuffer | null = '';
   percentMatch: number = 0;
@@ -21,24 +21,27 @@ export class ValidateComponent implements OnInit{
 
   ngOnInit() {
     this.form = this.buildForm();
-    this.form.disable();
-    this.form.valueChanges.pipe(debounceTime(500)).subscribe(value => this.validateForm(value, this.data!));
+    this.validateForm(this.form.value, []);
+    this.form.valueChanges.pipe(debounceTime(500)).subscribe(value => this.validateForm(value, this.data));
   }
 
   validateForm(formValue: string, documentString: string[]): void {
     this.percentMatchByControl = this.validationService.matchFormValuesWithDocumentData(this.form?.value, documentString);
-    this.percentMatch = this.percentMatchByControl.reduce((acc, current)=>{return acc+current[1]}, 0) /7;
+    this.percentMatch = this.percentMatchByControl.reduce((acc, current) => {
+      return acc + current[1]
+    }, 0) / 7;
   }
 
-  onUploadDocument(event: CustomEvent){
-    this.form?.enable();
+  onUploadDocument(event: CustomEvent) {
     const formData = new FormData();
     formData.append('file', event.detail[0]);
     const file = event.detail[0];
     const reader = new FileReader();
     reader.onload = e => this.imageSrc = reader.result;
     reader.readAsDataURL(file);
-    this.validationService.readTextFromPhoto(formData).subscribe(textData =>this.data = textData);
+    this.validationService.readTextFromPhoto(formData).subscribe(textData => {
+      this.data = textData;
+    });
   }
 
   buildForm(): FormGroup {
@@ -50,7 +53,7 @@ export class ValidateComponent implements OnInit{
       city: this.fb.control(""),
       houseNumber: this.fb.control(""),
       policyNumber: this.fb.control(""),
-    }, )
+    },)
   }
 
 }
