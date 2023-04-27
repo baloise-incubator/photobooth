@@ -12,6 +12,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class OcrService {
@@ -37,6 +41,7 @@ public class OcrService {
     }
 
     private String trimSpecialCharacters(String s) {
+        s = s.replaceAll("(?<=[a-zA-Z0-9äÄöÖüÜßẞ])\\|", "l");
         s = s.replaceAll("[^a-zA-Z0-9\\s\\näÄöÖüÜßẞ.‘?|\"',\\/@]+", "");
         return s;
     }
@@ -102,5 +107,15 @@ public class OcrService {
         }
         ImageIO.write(fopimage, "jpg", new File("output.png"));
         return fopimage;
+    }
+
+    public List<String> transformToArray(String ocrString) {
+        String trimmedString = ocrString.replaceAll("[\n\t]", " ");
+        trimmedString = trimmedString.replaceAll("[^a-zA-Z0-9äÄöÖüÜßẞ\\s]", "");
+        String[] words = trimmedString.split(" ");
+        List<String> list = new ArrayList<>(Arrays.asList(words));
+        list.removeAll(Collections.singleton(null));
+        list.removeAll(Collections.singleton(""));
+        return list;
     }
 }
