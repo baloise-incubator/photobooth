@@ -110,7 +110,8 @@ public class OcrService {
     }
 
     public List<String> transformToArray(String ocrString) {
-        String trimmedString = ocrString.replaceAll("[^a-zA-Z0-9äÄöÖüÜßẞ]", " ");
+        String trimmedString = ocrString.replaceAll("[\n\t]", " ");
+        trimmedString = trimmedString.replaceAll("[^a-zA-Z0-9äÄöÖüÜßẞ\\s]", "");
         String[] words = trimmedString.split(" ");
         List<String> list = new ArrayList<>(Arrays.asList(words));
         list.removeAll(Collections.singleton(null));
