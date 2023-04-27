@@ -29,7 +29,5 @@ ARG JAR_FILE=/app/target/*.jar
 # Copy the JAR file from the builder stage to the container
 COPY --from=builder ${JAR_FILE} ./app.jar
 
-COPY --from=builder ./app.jar/BOOT-INF/classes/linux-x86-64 ./app.jar/BOOT-INF/classes/
-
 # Run the Java app
 ENTRYPOINT ["java", "-jar", "app.jar"]
