@@ -13,7 +13,7 @@ RUN mvn clean install
 # Copy the entire project to the container
 COPY . .
 
-RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-fra tesseract-ocr-ita; tesseract --version; cp /usr/lib/x86_64-linux-gnu/* /app/src/main/resources/;
+RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-fra tesseract-ocr-ita; tesseract --version; cp -r /usr/lib/x86_64-linux-gnu/* /app/src/main/resources/;
 
 # Build the JAR file
 RUN mvn package
