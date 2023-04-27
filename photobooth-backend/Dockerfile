@@ -4,6 +4,8 @@ FROM maven:3.8-openjdk-11-slim AS builder
 # Set the working directory in the container
 WORKDIR /app
 
+RUN apt-get update; apt-get install -y tesseract-ocr-all libleptonica-dev libtesseract-dev;
+
 # Copy the Maven project files to the container
 COPY pom.xml .
 
@@ -28,4 +30,4 @@ ARG JAR_FILE=/app/target/*.jar
 COPY --from=builder ${JAR_FILE} ./app.jar
 
 # Run the Java app
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
