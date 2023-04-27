@@ -33,7 +33,7 @@ public class PhotoboothBackendApplication {
         log.info("tessdata: " + tessdataPath);
         Tesseract tesseract = new Tesseract();
         tesseract.setOcrEngineMode(TessAPI.TessOcrEngineMode.OEM_TESSERACT_LSTM_COMBINED);
-        tesseract.setDatapath(tessdataPath);
+        tesseract.setDatapath("tessdata");
         tesseract.setLanguage("deu");
         return tesseract;
     }
