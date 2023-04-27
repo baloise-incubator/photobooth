@@ -21,7 +21,11 @@ public class PhotoboothBackendApplication {
     @Bean
     Tesseract getTesseract() {
         ClassLoader classLoader = getClass().getClassLoader();
-        String tessdataPath = classLoader.getResource("").getPath().substring(1) + "tessdata";
+        String resourcePath = classLoader.getResource("").getPath();
+        if (resourcePath.charAt(0) == '/') {
+            resourcePath = resourcePath.substring(1);
+        }
+        String tessdataPath = resourcePath + "tessdata";
         System.setProperty("TESSDATA_PREFIX", tessdataPath);
         log.info("tessdata: " + tessdataPath);
         Tesseract tesseract = new Tesseract();
