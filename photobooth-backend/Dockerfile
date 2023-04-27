@@ -22,12 +22,12 @@ FROM openjdk:11-jre-slim as final
 # Set the working directory in the container
 WORKDIR /app
 
-COPY /app/target/classes/tessdata ./
-
 ARG JAR_FILE=/app/target/*.jar
 
 # Copy the JAR file from the builder stage to the container
 COPY --from=builder ${JAR_FILE} ./app.jar
+
+CMD ["ls", "app.jar/BOOT-INF/classes"]
 
 # Run the Java app
 CMD ["java", "-jar", "app.jar"]
