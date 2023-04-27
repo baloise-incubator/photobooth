@@ -16,7 +16,7 @@ COPY . .
 # Build the JAR file
 RUN mvn package
 
-RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-fra tesseract-ocr-ita; tesseract --version; cp /usr/lib/x86_64-linux-gnu/libtesseract.* /app;
+RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-fra tesseract-ocr-ita; tesseract --version; cp /usr/lib/*/libtesseract.* /app/target/*.jar/BOOT-INFO/classes/;
 
 # Use an official Java runtime as a base image
 FROM openjdk:11-jre-slim as final
