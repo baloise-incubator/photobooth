@@ -1,13 +1,18 @@
 package com.codecamp.photobooth;
 
+import com.codecamp.photobooth.rest.PhotoController;
 import net.sourceforge.tess4j.TessAPI;
 import net.sourceforge.tess4j.Tesseract;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.logging.Logger;
+
 @SpringBootApplication
 public class PhotoboothBackendApplication {
+
+    static Logger log = Logger.getLogger(PhotoController.class.getName());
 
     public static void main(String[] args) {
         SpringApplication.run(PhotoboothBackendApplication.class, args);
@@ -18,6 +23,7 @@ public class PhotoboothBackendApplication {
         ClassLoader classLoader = getClass().getClassLoader();
         String tessdataPath = classLoader.getResource("").getPath().substring(1) + "tessdata";
         System.setProperty("TESSDATA_PREFIX", tessdataPath);
+        log.info("tessdata: " + tessdataPath);
         Tesseract tesseract = new Tesseract();
         tesseract.setOcrEngineMode(TessAPI.TessOcrEngineMode.OEM_TESSERACT_LSTM_COMBINED);
         tesseract.setDatapath(tessdataPath);
