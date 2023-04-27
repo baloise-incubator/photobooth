@@ -1,7 +1,7 @@
 # Use an official Maven base image as a parent image
 FROM maven:3.8-openjdk-11-slim AS builder
 
-RUN sudo apt-get install tesseract-ocr
+RUN apt-get update; apt-get install tesseract-ocr
 
 # Set the working directory in the container
 WORKDIR /app
