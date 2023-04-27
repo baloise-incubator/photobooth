@@ -24,6 +24,7 @@ import { PopulateComponent } from './src/populate/populate.component';
 import { FormComponent } from './src/form/form.component';
 import {balIconDocument, balIconFile} from "@baloise/design-system-icons";
 import { ValidateComponent } from './src/validate/validate.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ValidateComponent } from './src/validate/validate.component';
     BalTextModule,
     BalInputSliderModule,
     BalFieldModule,
-    BalInputModule
+    BalInputModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
