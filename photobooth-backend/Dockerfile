@@ -8,16 +8,15 @@ WORKDIR /app
 COPY pom.xml .
 
 # Build the Maven project
-#RUN mvn clean install
-
-RUN apt update; apt-get update; apt-get install -y tesseract-ocr ghostscript; mvn clean install; tesseract --version;
+RUN mvn clean install
 
 # Copy the entire project to the container
 COPY . .
 
+RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-fra tesseract-ocr-ita; tesseract --version; cp /usr/lib/*/libtesseract.* /app/target/*.jar/BOOT-INFO/classes/;
+
 # Build the JAR file
 RUN mvn package
-#RUN apt update; apt-get update; apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-fra tesseract-ocr-ita; tesseract --version; cp /usr/lib/*/libtesseract.* /app/target/*.jar/BOOT-INFO/classes/;
 
 # Use an official Java runtime as a base image
 FROM openjdk:11-jre-slim as final
