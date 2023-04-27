@@ -5,7 +5,7 @@
     </bal-card-subtitle>
     <bal-card-content>
       <div class="columns">
-        <form *ngIf="form" [formGroup]="form" class="column">
+        <form *ngIf="form && data.length" [formGroup]="form" class="column">
           <div *ngFor="let c of percentMatchByControl ">
             <bal-field>
               <bal-field-label>{{c[0]?.toLocaleUpperCase()}}</bal-field-label>

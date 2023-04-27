@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {debounceTime} from "rxjs";
+import {debounceTime, takeUntil} from "rxjs";
 import {ValidationService} from "./validation.service";
 
 @Component({
@@ -9,25 +9,14 @@ import {ValidationService} from "./validation.service";
   styleUrls: ['./validate.component.scss']
 })
 export class ValidateComponent implements OnInit{
-  @Input()
   data: string[] = [];
-
-  @Input()
   imageSrc: string | ArrayBuffer | null = '';
-
-  @Input()
   percentMatch: number = 0;
-
-  @Input()
   percentMatchByControl: [string, number, string][] = [];
-
-  @Output()
-  uploadDocument: EventEmitter<CustomEvent> = new EventEmitter<CustomEvent>();
 
   form?: FormGroup;
 
   constructor(private fb: FormBuilder, private validationService: ValidationService) {
-    this.data = this.validationService.readTextFromPhoto();
   }
 
   ngOnInit() {
@@ -43,7 +32,13 @@ export class ValidateComponent implements OnInit{
 
   onUploadDocument(event: CustomEvent){
     this.form?.enable();
-    this.uploadDocument.emit(event);
+    const formData = new FormData();
+    formData.append('file', event.detail[0]);
+    const file = event.detail[0];
+    const reader = new FileReader();
+    reader.onload = e => this.imageSrc = reader.result;
+    reader.readAsDataURL(file);
+    this.validationService.readTextFromPhoto(formData).subscribe(textData =>this.data = textData);
   }
 
   buildForm(): FormGroup {
