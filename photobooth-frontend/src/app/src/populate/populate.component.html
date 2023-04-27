@@ -1,2 +1,54 @@
 <p>populate works!</p>
 {{data}}
+<bal-card class="mt-normal">
+  <bal-card-title>User data</bal-card-title>
+<!--  <bal-card-subtitle *ngIf="imageSrc">-->
+<!--    <bal-input-slider max="100" min="0" step="20" value="{{percentMatch}}"></bal-input-slider>-->
+<!--  </bal-card-subtitle>-->
+  <bal-card-content>
+    <div class="columns">
+      <div class="column">
+        <bal-field>
+          <bal-field-label>Firstname</bal-field-label>
+          <bal-field-control>
+            <bal-input placeholder="Enter your firstname" formControlName="firstName"></bal-input>
+          </bal-field-control>
+        </bal-field>
+        <bal-field>
+          <bal-field-label>Lastname</bal-field-label>
+          <bal-field-control>
+            <bal-input placeholder="Enter your lastname"></bal-input>
+          </bal-field-control>
+        </bal-field>
+        <bal-field>
+          <bal-field-label>PostCode</bal-field-label>
+          <bal-field-control>
+            <bal-input placeholder="Enter your firstname"></bal-input>
+          </bal-field-control>
+        </bal-field>
+        <bal-field>
+          <bal-field-label>Street</bal-field-label>
+          <bal-field-control>
+            <bal-input placeholder="Enter your firstname"></bal-input>
+          </bal-field-control>
+        </bal-field>
+        <bal-field>
+          <bal-field-label>Postcode</bal-field-label>
+          <bal-field-control>
+            <bal-input placeholder="Enter your firstname"></bal-input>
+          </bal-field-control>
+        </bal-field>
+        <bal-field>
+          <bal-field-label>House number</bal-field-label>
+          <bal-field-control>
+            <bal-input placeholder="Enter your firstname"></bal-input>
+          </bal-field-control>
+        </bal-field>
+      </div>
+<!--      <div class="column">-->
+<!--        <img [src]="imageSrc" alt="Preview" width="80%">-->
+<!--        <bal-file-upload (balFilesAdded)="uploadDocument.emit($event)" hasFileList="false" accept="image/png,image/jpeg"></bal-file-upload>-->
+<!--      </div>-->
+    </div>
+  </bal-card-content>
+</bal-card>

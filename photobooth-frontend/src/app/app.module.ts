@@ -11,7 +11,7 @@ import {
   BalFileUploadModule,
   BalFooterModule,
   BalHeadingModule,
-  BalIconModule,
+  BalIconModule, BalInputModule,
   BalInputSliderModule,
   BalNavbarModule,
   BalStackModule,
@@ -55,7 +55,8 @@ import { ValidateComponent } from './src/validate/validate.component';
     BalContentModule,
     BalTextModule,
     BalInputSliderModule,
-    BalFieldModule
+    BalFieldModule,
+    BalInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
