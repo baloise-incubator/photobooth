@@ -1,7 +1,7 @@
 <bal-stage color="green" size="small">
   <bal-stage-body class="is-marginless">
     <bal-heading>Validating form</bal-heading>
-      <app-validate *ngIf="!populate" [data]="content" [imageSrc]="imageSrc" (uploadDocument)="onBalFilesAdded($event)"></app-validate>
+      <app-validate *ngIf="!populate" [imageSrc]="imageSrc" (uploadDocument)="onBalFilesAdded($event)"></app-validate>
       <app-populate *ngIf="populate" [data]="content"></app-populate>
   </bal-stage-body>
 </bal-stage>

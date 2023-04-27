@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {debounceTime} from "rxjs";
+import {ValidationService} from "./validation.service";
 
 @Component({
   selector: 'app-validate',
@@ -9,7 +10,7 @@ import {debounceTime} from "rxjs";
 })
 export class ValidateComponent implements OnInit{
   @Input()
-  data: string | undefined;
+  data: string[] = [];
 
   @Input()
   imageSrc: string | ArrayBuffer | null = '';
@@ -17,25 +18,32 @@ export class ValidateComponent implements OnInit{
   @Input()
   percentMatch: number = 0;
 
+  @Input()
+  percentMatchByControl: [string, number, string][] = [];
+
   @Output()
   uploadDocument: EventEmitter<CustomEvent> = new EventEmitter<CustomEvent>();
 
   form?: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private validationService: ValidationService) {
+    this.data = this.validationService.readTextFromPhoto();
   }
 
   ngOnInit() {
     this.form = this.buildForm();
-    this.form.valueChanges.pipe(debounceTime(500)).subscribe(value => this.validateForm());
+    this.form.disable();
+    this.form.valueChanges.pipe(debounceTime(500)).subscribe(value => this.validateForm(value, this.data!));
   }
 
-  validateForm(): void {
-    if(this.data?.indexOf(this.form?.get('firstName')?.value) != -1){
-      this.percentMatch = 100;
-      return;
-    }
-    this.percentMatch = 0;
+  validateForm(formValue: string, documentString: string[]): void {
+    this.percentMatchByControl = this.validationService.matchFormValuesWithDocumentData(this.form?.value, documentString);
+    this.percentMatch = this.percentMatchByControl.reduce((acc, current)=>{return acc+current[1]}, 0) /7;
+  }
+
+  onUploadDocument(event: CustomEvent){
+    this.form?.enable();
+    this.uploadDocument.emit(event);
   }
 
   buildForm(): FormGroup {
@@ -47,7 +55,7 @@ export class ValidateComponent implements OnInit{
       city: this.fb.control(""),
       houseNumber: this.fb.control(""),
       policyNumber: this.fb.control(""),
-    })
+    }, )
   }
 
 }
