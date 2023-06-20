@@ -11,7 +11,9 @@ import {
   BalFileUploadModule,
   BalFooterModule,
   BalHeadingModule,
-  BalIconModule, BalInputModule,
+  BalIconModule,
+  BalInputGroupModule,
+  BalInputModule,
   BalInputSliderModule,
   BalNavbarModule,
   BalStackModule,
@@ -58,7 +60,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     BalInputSliderModule,
     BalFieldModule,
     BalInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BalInputGroupModule
   ],
   providers: [],
   bootstrap: [AppComponent]
