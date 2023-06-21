@@ -1,2 +1,67 @@
-<p>populate works!</p>
-{{data}}
+<form [formGroup]="formGroup">
+  <bal-card class="mt-normal">
+    <bal-card-title>User data</bal-card-title>
+    <!--  <bal-card-subtitle *ngIf="imageSrc">-->
+    <!--    <bal-input-slider max="100" min="0" step="20" value="{{percentMatch}}"></bal-input-slider>-->
+    <!--  </bal-card-subtitle>-->
+    <bal-card-content>
+      <div class="columns">
+        <div class="column">
+          <bal-field>
+            <bal-field-label>Firstname</bal-field-label>
+            <bal-field-control>
+              <bal-input placeholder="Enter your firstname" formControlName="firstName" [ngClass]="formGroup.get('firstName')?.getRawValue() ? 'is-success' : null"></bal-input>
+            </bal-field-control>
+          </bal-field>
+          <bal-field>
+            <bal-field-label>Lastname</bal-field-label>
+            <bal-field-control>
+              <bal-input placeholder="Enter your lastname" formControlName="lastName" [ngClass]="formGroup.get('lastName')?.getRawValue() ? 'is-success' : null"></bal-input>
+            </bal-field-control>
+          </bal-field>
+          <bal-field>
+            <bal-field-label>Street</bal-field-label>
+            <bal-field-control>
+              <bal-input placeholder="Enter your street" formControlName="street" [ngClass]="formGroup.get('street')?.getRawValue() ? 'is-success' : null"></bal-input>
+            </bal-field-control>
+          </bal-field>
+          <bal-field>
+            <bal-field-label>House number</bal-field-label>
+            <bal-field-control>
+              <bal-input placeholder="Enter your house number" formControlName="houseNumber" [ngClass]="formGroup.get('houseNumber')?.getRawValue() ? 'is-success' : null"></bal-input>
+            </bal-field-control>
+          </bal-field>
+          <bal-field>
+            <bal-field-label>City</bal-field-label>
+            <bal-field-control>
+              <bal-input placeholder="Enter your postcode" formControlName="city" [ngClass]="formGroup.get('city')?.getRawValue() ? 'is-success' : null"></bal-input>
+            </bal-field-control>
+          </bal-field>
+          <bal-field>
+            <bal-field-label>Postcode</bal-field-label>
+            <bal-field-control>
+              <bal-input placeholder="Enter your postcode" formControlName="zip" [ngClass]="formGroup.get('zip')?.getRawValue() ? 'is-success' : null"></bal-input>
+            </bal-field-control>
+          </bal-field>
+          <bal-field *ngIf="formGroup.get('policyNo')?.getRawValue()">
+            <bal-field-label>Policy Number</bal-field-label>
+            <bal-field-control>
+              <bal-input placeholder="Enter your policy number" formControlName="policyNo" [ngClass]="formGroup.get('policyNo')?.getRawValue() ? 'is-success' : null"></bal-input>
+            </bal-field-control>
+          </bal-field>
+          <bal-field *ngIf="formGroup.get('product')?.getRawValue()">
+            <bal-field-label>Policy Number</bal-field-label>
+            <bal-field-control>
+              <bal-input placeholder="Enter your product" formControlName="product" [ngClass]="formGroup.get('product')?.getRawValue() ? 'is-success' : null"></bal-input>
+            </bal-field-control>
+          </bal-field>
+        </div>
+        <div class="column">
+          <img *ngIf="imageSrc && !isLoading" [src]="imageSrc" alt="Preview" width="80%">
+          <bal-file-upload *ngIf="!imageSrc || isLoading" (balFilesAdded)="uploadDocument.emit($event)" hasFileList="false"
+                           accept="image/png,image/jpeg" [loading]="isLoading"></bal-file-upload>
+        </div>
+      </div>
+    </bal-card-content>
+  </bal-card>
+</form>
