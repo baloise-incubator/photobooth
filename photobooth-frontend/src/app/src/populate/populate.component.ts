@@ -102,6 +102,8 @@ export class PopulateComponent {
   }
 
   onUploadDocument(event: CustomEvent) {
+    this.loadingData = true;
+
     const formData = new FormData();
     formData.append('file', event.detail[0]);
     const file = event.detail[0];
@@ -109,7 +111,6 @@ export class PopulateComponent {
     reader.onload = e => this.imageSrc = reader.result;
     reader.readAsDataURL(file);
     this.populateService.readTextFromPhoto(formData).subscribe(textData => {
-      this.loadingData = true;
       this.processData(textData);
       this.loadingData = false;
     });
