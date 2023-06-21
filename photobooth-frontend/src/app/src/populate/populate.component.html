@@ -54,7 +54,7 @@
             </bal-field-control>
           </bal-field>
           <bal-field *ngIf="formGroup.get('product')?.getRawValue()">
-            <bal-field-label>Policy Number</bal-field-label>
+            <bal-field-label>Policy type</bal-field-label>
             <bal-field-control>
               <bal-input placeholder="Enter your product" formControlName="product"
                          [ngClass]="formGroup.get('product')?.getRawValue() ? 'is-success' : null"></bal-input>
