@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
-import {first} from "rxjs";
-import {BackendService} from "../service/backend.service";
-import {DocLanguage} from "../doc-language";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BalToastService} from "@baloise/design-system-components-angular";
+import {DocLanguage} from "../doc-language";
+import {BackendService} from "../service/backend.service";
 
 @Component({
   selector: 'app-form',
@@ -14,10 +13,9 @@ export class FormComponent {
 
   languages = DocLanguage;
   docLanguage: string | undefined;
-  content: string | undefined;
   populate = false;
   isLoading = false;
-  imageSrc:string | ArrayBuffer | null = '';
+  imageSrc: string | ArrayBuffer | null = '';
 
 
   constructor(private backendService: BackendService,
@@ -26,45 +24,7 @@ export class FormComponent {
               private toastr: BalToastService) {
   }
 
-  chooseLang(lang: string): void {
-    this.docLanguage = lang;
-  }
-
   ngOnInit() {
     this.populate = (this.route.snapshot.firstChild?.data as any).value === 'populate';
-  }
-
-
-  onBalFilesAdded(e: CustomEvent) {
-    const formData = new FormData();
-    formData.append('file', e.detail[0]);
-    this.isLoading = true;
-      const file = e.detail[0];
-      const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
-      reader.readAsDataURL(file);
-
-    this.backendService.uploadDocument(
-      formData,
-      this.docLanguage,
-      (this.route.snapshot.firstChild?.data as any).value)
-      .pipe(
-        first(),
-      ).subscribe(
-      data => this.content = data,
-      err => this.toastr.create({
-        closeHandler(): void {
-        },
-        duration: 0,
-        message: err.message,
-        color: 'danger'
-      }),
-      () => this.isLoading = false
-    )
-
-  }
-
-  onBalRejectedFile(e: Event) {
-    console.log(e)
   }
 }

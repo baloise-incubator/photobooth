@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, Output, SimpleChanges, ViewChild, ViewChildren} from '@angular/core';
-import {FormGroup, FormControl} from "@angular/forms";
+import {Component, Input} from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
 import {Keyword} from "../keyword";
 import {Title} from "../title";
+import {PopulateService} from './populate.service';
 
 @Component({
   selector: 'app-populate',
@@ -10,19 +11,12 @@ import {Title} from "../title";
 })
 export class PopulateComponent {
 
-  @Input()
   data: string | undefined;
 
   @Input()
   imageSrc: any;
 
-  @Input()
-  isLoading = false;
-
   loadingData = false;
-
-  @Output()
-  uploadDocument: EventEmitter<CustomEvent> = new EventEmitter<CustomEvent>();
 
   formGroup = new FormGroup({
     firstName: new FormControl(),
@@ -35,35 +29,27 @@ export class PopulateComponent {
     policyNo: new FormControl(),
   });
 
-  constructor() {
+  constructor(private populateService: PopulateService) {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.data) {
-      this.loadingData = true;
-      this.processData();
-      this.loadingData = false;
-    }
-  }
+  processData(data: any) {
 
-  processData() {
-
-    let result : any = {}
+    let result: any = {}
     let title = '';
 
-    let cleared = (this.data as string).replaceAll('\n', ' ')
+    let cleared = (data as string).replaceAll('\n', ' ')
 
     console.log(Title.MRS)
-    if(cleared.includes(Title.MS)){
+    if (cleared.includes(Title.MS)) {
       title = Title.MS;
-    } else if(cleared.includes(Title.MRS)){
+    } else if (cleared.includes(Title.MRS)) {
       title = Title.MRS;
     }
 
     let upper = cleared.substring(
-      (this.data as string).indexOf(title), (this.data as string).lastIndexOf(title))
+      (data as string).indexOf(title), (data as string).lastIndexOf(title))
       .split(' ');
-    let lower = cleared.substring((this.data as string)
+    let lower = cleared.substring((data as string)
       .lastIndexOf(title))
       .split(' ')
       .slice(1, 3);
@@ -98,8 +84,8 @@ export class PopulateComponent {
       wordArray[wordArray.lastIndexOf(Keyword.POLICY_NO) + 1]
     )
 
-    for(let key in result){
-      if(this.formGroup.get(key)){
+    for (let key in result) {
+      if (this.formGroup.get(key)) {
         this.formGroup.get(key)?.patchValue(result[key])
       }
     }
@@ -113,6 +99,20 @@ export class PopulateComponent {
     }
 
     return ret.trim();
+  }
+
+  onUploadDocument(event: CustomEvent) {
+    const formData = new FormData();
+    formData.append('file', event.detail[0]);
+    const file = event.detail[0];
+    const reader = new FileReader();
+    reader.onload = e => this.imageSrc = reader.result;
+    reader.readAsDataURL(file);
+    this.populateService.readTextFromPhoto(formData).subscribe(textData => {
+      this.loadingData = true;
+      this.processData(textData);
+      this.loadingData = false;
+    });
   }
 
 

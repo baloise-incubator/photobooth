@@ -1,31 +1,33 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {HttpClientModule} from "@angular/common/http";
+import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from "@angular/forms";
+import {BrowserModule} from '@angular/platform-browser';
 import {
   BalButtonModule,
   BalCardModule,
   BalContentModule,
-  BalCoreModule, BalFieldModule,
+  BalCoreModule,
+  BalFieldModule,
   BalFileUploadModule,
   BalFooterModule,
   BalHeadingModule,
   BalIconModule,
   BalInputGroupModule,
+  BalInputModule,
   BalInputSliderModule,
   BalNavbarModule,
   BalStackModule,
   BalStageModule,
   BalTextModule
 } from "@baloise/design-system-components-angular";
-import {HttpClientModule} from "@angular/common/http";
-import { LandingComponent } from './src/landing/landing.component';
-import { PopulateComponent } from './src/populate/populate.component';
-import { FormComponent } from './src/form/form.component';
 import {balIconDocument, balIconFile} from "@baloise/design-system-icons";
-import { ValidateComponent } from './src/validate/validate.component';
-import {ReactiveFormsModule} from "@angular/forms";
+
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {FormComponent} from './src/form/form.component';
+import {LandingComponent} from './src/landing/landing.component';
+import {PopulateComponent} from './src/populate/populate.component';
+import {ValidateComponent} from './src/validate/validate.component';
 
 @NgModule({
   declarations: [
@@ -65,4 +67,5 @@ import {ReactiveFormsModule} from "@angular/forms";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
