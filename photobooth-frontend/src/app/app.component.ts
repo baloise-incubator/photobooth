@@ -16,19 +16,4 @@ export class AppComponent {
   ) {
   }
 
-
-  onBalFilesAdded(e: CustomEvent) {
-    const formData = new FormData();
-    formData.append('file', e.detail[0]);
-    this.backendService.uploadDocument(formData).pipe(first(),tap( // Log the result or error
-      {
-        next: (data) => console.log(data),
-        error: (error) => console.log(error)
-      }
-    )).subscribe(r=>console.log(r));
-  }
-
-  onBalRejectedFile(e: Event) {
-    console.log(e)
-  }
 }

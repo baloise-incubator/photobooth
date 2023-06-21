@@ -1,0 +1,34 @@
+<bal-card class="mt-normal">
+  <bal-card-title>Form is matching with document by: {{percentMatch | percent}}</bal-card-title>
+  <bal-card-subtitle>
+    <bal-input-slider max="1" min="0" step="0.1" value="{{percentMatch}}"></bal-input-slider>
+  </bal-card-subtitle>
+  <bal-card-content>
+    <div class="columns">
+      <form *ngIf="form" [formGroup]="form" class="column">
+        <div *ngFor="let c of percentMatchByControl">
+          <bal-field>
+            <bal-field-label>{{c[0]?.toLocaleUpperCase()}}</bal-field-label>
+            <bal-field-control>
+              <bal-input-group>
+                <bal-input style="max-width: 106px" [value]="c[1] | percent"></bal-input>
+                <bal-input [formControlName]="c[0]" placeholder="Enter your {{c[0]}}"></bal-input>
+              </bal-input-group>
+            </bal-field-control>
+            <bal-field-message>Potential word: {{c[2]}}</bal-field-message>
+          </bal-field>
+        </div>
+      </form>
+      <div class="column">
+        <div *ngIf="imageSrc">
+          <img [src]="imageSrc" alt="Preview" width="80%">
+        </div>
+        <div *ngIf="!imageSrc">
+          Please upload document, before validating
+        </div>
+        <bal-file-upload class="mt-normal" (balFilesAdded)="onUploadDocument($event)" hasFileList="false"
+                         accept="image/png,image/jpeg"></bal-file-upload>
+      </div>
+    </div>
+  </bal-card-content>
+</bal-card>

@@ -1,0 +1,32 @@
+<div class="container mt-xx-large">
+  <div class="columns">
+    <div class="column is-half">
+      <bal-card color="purple-light" fullheight clickable value="validate" (click)="onClick('validate')">
+        <bal-card-content>
+          <bal-stack direction="column" alignment="center" space="large">
+            <bal-icon name="file" color="red-2" size="xx-large"></bal-icon>
+            <bal-content alignment="center">
+              <bal-heading level="x-large">Form validation</bal-heading>
+              <bal-text>Process image and validate data</bal-text>
+            </bal-content>
+            <bal-button>Validate</bal-button>
+          </bal-stack>
+        </bal-card-content>
+      </bal-card>
+    </div>
+    <div class="column is-half">
+      <bal-card color="yellow-light" fullheight clickable value="populate" (click)="onClick('populate')">
+        <bal-card-content>
+          <bal-stack direction="column" alignment="center" space="large">
+            <bal-icon name="document" color="green-2" size="xx-large"></bal-icon>
+            <bal-content alignment="center">
+              <bal-heading level="x-large">Form prefil</bal-heading>
+              <bal-text>Create form populated with data</bal-text>
+            </bal-content>
+            <bal-button>Populate</bal-button>
+          </bal-stack>
+        </bal-card-content>
+      </bal-card>
+    </div>
+  </div>
+</div>

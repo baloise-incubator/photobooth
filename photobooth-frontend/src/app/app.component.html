@@ -5,28 +5,10 @@
       </bal-navbar-brand>
     </bal-navbar>
   </header>
-  <bal-stage color="green" size="small">
-    <bal-stage-body>
-      <bal-heading>Welcome to the</bal-heading>
-      <bal-heading subtitle>Baloise Design System</bal-heading>
-
-      <bal-file-upload
-        accept="image/png,image/jpeg"
-        [label]="'Choose file to scan'"
-        [multiple]="'false'"
-        hasFileList="false"
-        (balFilesAdded)="onBalFilesAdded($event)"
-        (balRejectedFile)="onBalRejectedFile($event)"
-      >
-
-      </bal-file-upload>
-    </bal-stage-body>
-  </bal-stage>
-  <main class="container mt-xx-large">
-
-
-
-  </main>
+  <div class="">
+    <router-outlet>
+    </router-outlet>
+  </div>
   <bal-footer>
     <!-- Footer content -->
   </bal-footer>
