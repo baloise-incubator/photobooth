@@ -36,7 +36,7 @@ public class OcrService {
             String str = tesseract.doOCR(preProcessedImage);
             return trimSpecialCharacters(str);
         } catch (Exception e) {
-            throw new RuntimeException("There was an issue with OCR, please try again or take different picture");
+            throw new RuntimeException("There was an issue with OCR, please try again or take different picture" + e.getMessage());
         }
     }
 
