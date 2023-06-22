@@ -105,7 +105,7 @@ public class OcrService {
                 fopimage.setRGB(x, y, p);
             }
         }
-        ImageIO.write(fopimage, "jpg", new File("output.png"));
+//        ImageIO.write(fopimage, "jpg", new File("output.png"));
         return fopimage;
     }
 
